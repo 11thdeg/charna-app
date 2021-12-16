@@ -1,15 +1,14 @@
 <script lang="ts">
   import { icons } from './icons.json'
-  export let name:string
-  export let darkmode:string = 'dark'
+  export let name: string
+  export let darkmode: string = 'dark'
 
   $: stub = icons.includes(name) ? name : 'default'
   $: iconsrc = `/icons/${darkmode}/${stub}.svg`
-
 </script>
 
 <div class="icon {darkmode}">
-  <img src={ iconsrc } alt="{ name }">
+  <img src={iconsrc} alt={name} />
 </div>
 
 <style lang="sass">
