@@ -29,5 +29,9 @@
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"overmind": "^28.0.1",
+		"overmind-svelte": "^5.0.1"
+	}
 }

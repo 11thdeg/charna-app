@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import { state, actions } from '../overmind'
+  
+    $: count = $state.count
+  </script>
+  
+  <p>Count: {count}</p>
+  <button id="increase" on:click={() => actions.increase()}>Increase</button>
+  <button id="decrease" on:click={() => actions.decrease()}>Increase</button>
