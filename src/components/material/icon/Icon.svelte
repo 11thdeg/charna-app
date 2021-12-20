@@ -12,7 +12,7 @@
   $: sizeClass = xSmall ? 'xSmall' : small ? 'small' : large ? 'large' : xLarge ? 'xlarge' : ''
 </script>
 
-<div class="icon {darkmode} {sizeClass}">
+<div class="icon {sizeClass}">
   <img src={iconsrc} alt={name} />
 </div>
 
@@ -27,21 +27,18 @@
   img
     height: 100%
     width: 100%
-  &.xSmall
+  &.xSmall // Inline with small text, with line-height of 24px
+    height: 18px
+    width: 18px
+  &.small // at 1 grid height (24px)
     height: 24px
     width: 24px
-  &.small
-    height: 32px
-    width: 32px
-  &.large
-    height: 64px
-    width: 64px
-  &.xlarge
+  // medium, as "default" is at 2 grid height (48px)
+  &.large // at 3 grid height (72px)
+    height: 72px
+    width: 27px
+  &.xlarge // at 4 grid height (96px)
     height: 96px
     width: 96px
 
-.icon.dark
-  background-color: var(--color-secondary-d)
-.icon.light
-  background-color: var(--color-secondary-l)
 </style>

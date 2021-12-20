@@ -3,10 +3,24 @@
   import Icon from '../../components/material/icon/Icon.svelte'
 </script>
 
-<h1>Iconography</h1>
+<div>
+  <h1>Iconography</h1>
 
-<a href="./stylebook/iconography">Show only this</a>
+  <a href="./stylebook/iconography">Show only this</a>
+</div>
 
-{#each icons as icon}
-  <Icon name={icon} small />
-{/each}
+<div class="iconlist">
+  {#each icons as icon}
+    <div>
+      <Icon name={icon} small />
+    </div>
+  {/each}
+</div>
+
+<style lang="sass">
+div.iconlist
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  gap: 8px
+</style>

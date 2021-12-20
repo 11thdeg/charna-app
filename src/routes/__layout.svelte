@@ -5,6 +5,8 @@
   }
 </script>
 
-<slot />
+<main>
+  <slot />
+</main>
 
 <button on:click={toggle}>Toggle dark mode</button>

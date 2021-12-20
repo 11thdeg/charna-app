@@ -1,3 +1,7 @@
-<a href="/stylebook">Stylebook</a>
+<nav>
+  <a href="/stylebook">Stylebook</a>
+</nav>
 
-<slot />
+<main>
+  <slot />
+</main>
