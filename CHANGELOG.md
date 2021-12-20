@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/11thdeg/skald/compare/v0.0.3...v0.0.4) (2021-12-20)
+
+
+### Bug Fixes
+
+* linter fixes and lints ([8f52f52](https://github.com/11thdeg/skald/commit/8f52f5255998812e6364c332350e13a9e3affcbd))
+* no longer running prettier on changelog ([1f3e870](https://github.com/11thdeg/skald/commit/1f3e8705ffd4d7353f4fa4c5a4f224fe7c5d1223))
+
 ### [0.0.3](https://github.com/11thdeg/skald/compare/v0.0.2...v0.0.3) (2021-12-20)
 
 
