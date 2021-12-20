@@ -3,14 +3,13 @@ import { browser } from '$app/env'
 
 export const darkmode = writable(true)
 
-export function toggleDarkmode (): void {
-  darkmode.update(v => !v)
+export function toggleDarkmode(): void {
+  darkmode.update((v) => !v)
 }
 
-// Required by SSR 
+// Required by SSR
 if (browser) {
   darkmode.subscribe((value) => {
-  
     if (value) window.document.body.classList.add('darkmode')
     else window.document.body.classList.remove('darkmode')
   })

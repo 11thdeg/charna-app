@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { browser } from '$app/env'
   import '../styles/app.sass'
-  import { darkmode, toggleDarkmode } from '../stores'
+  import { toggleDarkmode } from '../stores'
 </script>
 
 <main>
