@@ -31,6 +31,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.22"
+    "@sveltejs/adapter-static": "^1.0.0-next.22",
+    "firebase": "^9.6.1"
   }
 }
