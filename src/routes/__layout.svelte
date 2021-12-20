@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
+  import { browser } from '$app/env'
   import '../styles/app.sass'
-  function toggle() {
-    window.document.body.classList.toggle('darkmode')
-  }
+  import { darkmode, toggleDarkmode } from '../stores'
 </script>
 
 <main>
   <slot />
 </main>
 
-<button on:click={toggle}>Toggle dark mode</button>
+<button on:click={toggleDarkmode}>Toggle dark mode</button>
