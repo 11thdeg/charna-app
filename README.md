@@ -1,4 +1,10 @@
-# create-svelte
+# Skald
+
+This is a sister project to [pelilauta](https://pelilauta.web.app), written in Svelte as a SvelteKit generated Client Side Rendered (CSR), Single Page App (SPA).
+
+We'll focus on experimenting on Svelte, by using pelilauta data for characters and user profiles.
+
+## create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
 
