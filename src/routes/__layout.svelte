@@ -3,7 +3,8 @@
   import { toggleDarkmode } from '../stores'
   import { firebaseApp } from '../firebase'
   import { getAuth } from 'firebase/auth'
-  import { uid } from '../stores/authStore'
+  import { isAnonymous, uid } from '../stores/authStore'
+  import LoginScreen from '../components/loginScreen/LoginScreen.svelte'
 
   const auth = getAuth($firebaseApp)
 
@@ -16,17 +17,22 @@
       uid.set('')
     }
   })
-  $: name = displayname || 'Guest'
+  $: anon = $uid === ''
 </script>
 
-<nav>
-  Welcome {name}
-  – <a href="/">Index</a>
-  – <a href="/stylebook">Stylebook</a>
-</nav>
+{#if !anon}
+  <nav>
+    <ul>
+      <li><a href="/">Index</a></li>
+      <li><a href="/stylebook">Stylebook</a></li>
+      <li><button on:click={toggleDarkmode}>Toggle dark mode</button></li>
+    </ul>
+  </nav>
+  <main>
+    <slot />
+  </main>
+{/if}
 
-<main>
-  <slot />
-</main>
-
-<button on:click={toggleDarkmode}>Toggle dark mode</button>
+{#if anon}
+  <LoginScreen />
+{/if}
