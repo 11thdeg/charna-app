@@ -1,14 +1,17 @@
 <script lang="ts">
   import Button from '../material/Button/Button.svelte'
+  import { loginComplete } from '../../stores/authStore'
 </script>
 
 <main>
   <img alt="Charna" src="icons/dark/fox.svg" class="sitelogo" />
-  <div class="buttons">
-    <h1>Login</h1>
-    <Button>Google</Button>
-    <Button>Facebook</Button>
-  </div>
+  {#if $loginComplete}
+    <div class="buttons">
+      <h1>Login</h1>
+      <Button>Google</Button>
+      <Button>Facebook</Button>
+    </div>
+  {/if}
 </main>
 
 <style lang="sass">

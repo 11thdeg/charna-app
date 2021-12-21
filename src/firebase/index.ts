@@ -11,8 +11,8 @@ import type { Readable } from 'svelte/store'
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
-let app:FirebaseApp|null = null
-function getApp ():FirebaseApp {
+let app: FirebaseApp | null = null
+function getApp(): FirebaseApp {
   if (!app) {
     app = initializeApp(firebaseConfig)
   }
@@ -22,17 +22,17 @@ function getApp ():FirebaseApp {
 /**
  * @returns {FirebaseApp} Firebase App instance
  */
-const firebaseApp:Readable<FirebaseApp> = readable(null, (set) => {
+const firebaseApp: Readable<FirebaseApp> = readable(null, (set) => {
   set(getApp())
   return noop
 })
 
-let auth:Auth|null = null
+let auth: Auth | null = null
 
 /**
  * @returns {Auth} Firebase Auth instance
  */
-const firebaseAuth:Readable<Auth> = readable(null, (set) => {
+const firebaseAuth: Readable<Auth> = readable(null, (set) => {
   if (!app) {
     app = getApp()
   }
@@ -43,7 +43,4 @@ const firebaseAuth:Readable<Auth> = readable(null, (set) => {
   return noop
 })
 
-export {
-  firebaseApp,
-  firebaseAuth
-}
+export { firebaseApp, firebaseAuth }
