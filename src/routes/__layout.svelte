@@ -1,19 +1,29 @@
 <script lang="ts">
   import '../styles/app.sass'
   import { toggleDarkmode } from '../stores'
-  import { useFirebase } from '../firebase'
-  import { getAuth, onAuthStateChanged } from 'firebase/auth'
+  import { firebaseApp } from '../firebase'
+  import { getAuth } from 'firebase/auth'
+  import { uid } from '../stores/authStore'
 
-  useFirebase()
+  const auth = getAuth($firebaseApp)
 
-  onAuthStateChanged(getAuth(), (user) => {
-    if (user) {
-      console.log(user)
+  let displayname = ''
+  auth.onAuthStateChanged((user) => {
+    if (user && !user.isAnonymous) {
+      uid.set(user.uid)
+      displayname = user.displayName
     } else {
-      console.log('anonymous')
+      uid.set('')
     }
   })
+  $: name = displayname || 'Guest'
 </script>
+
+<nav>
+  Welcome {name}
+  – <a href="/">Index</a>
+  – <a href="/stylebook">Stylebook</a>
+</nav>
 
 <main>
   <slot />
