@@ -3,10 +3,12 @@
   import { toggleDarkmode } from '../stores'
   import { isAnonymous } from '../stores/authStore'
   import LoginScreen from '../components/loginScreen/LoginScreen.svelte'
+  import ThemeSwitcher from '../components/theme/ThemeSwitcher.svelte'
 </script>
 
 {#if !$isAnonymous}
-  <nav>
+  <nav class="appBar">
+    <ThemeSwitcher />
     <ul>
       <li><a href="/">Index</a></li>
       <li><a href="/stylebook">Stylebook</a></li>

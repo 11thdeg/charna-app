@@ -1,0 +1,32 @@
+:root
+  // Support for dark and light mode available
+  color-scheme: light dark
+
+@mixin darkTheme()
+  // add dark theme colors here
+  --color-low: #ccc
+  --color-medium: #ddd
+  --color-high: #eee
+  --color-background: #111
+
+@mixin lightTheme()
+  // add light theme colors here
+  --color-low: #333
+  --color-medium: #222
+  --color-high: #111
+  --color-background: #fff
+
+body
+  @include darkTheme()
+
+body.light-theme
+  @include lightTheme()
+
+// Styles for users who prefer light mode at the OS level
+@media (prefers-color-scheme: light)
+  // defaults to light theme
+  body
+    @include lightTheme()
+  // Override light mode with dark mode styles if the user decides to swap
+  body.dark-theme
+    @include darkTheme()
