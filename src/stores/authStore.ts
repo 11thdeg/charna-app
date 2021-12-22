@@ -1,14 +1,8 @@
-import { derived, writable } from 'svelte/store'
-import { firebaseAuth } from '../firebase'
+import { get, derived, writable } from 'svelte/store'
+import { firebaseAuth, firebaseFirestore } from '../firebase'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import type { DocumentData } from 'firebase/firestore'
 import type { User } from 'firebase/auth'
-
-const anonymousUser = {
-  uid: '',
-  email: '',
-  displayName: '',
-  photoURL: '',
-  isAnonymous: true
-}
 
 class AppUser {
   uid = ''
@@ -27,16 +21,46 @@ class AppUser {
       this.isAnonymous = user.isAnonymous
     }
   }
+
+  public toFirebaseDocument (): DocumentData {
+    return {
+      uid: this.uid,
+      email: this.email,
+      displayName: this.displayName,
+      photoURL: this.photoURL
+    }
+  }
+}
+
+const fb = get(firebaseFirestore)
+
+/**
+ * Synchronize data to Firebase
+ * 
+ * @param user AppUser instance of a logged in user
+ */
+async function syncFirebaseUser (user: AppUser) {
+  if (!user.uid) throw new Error('User has no uid')
+  const docRef = doc(fb, 'accounts', user.uid)
+  // Overwrite existing data for account root object based on the provider data.
+  // This is required for administration tools and content moderation.
+  // The object will be created if it does not exist.
+  await setDoc(docRef, 
+    {
+      ...user.toFirebaseDocument(),
+      lastLogin: serverTimestamp()
+    })
 }
 
 function createUser() {
-  const { subscribe, set } = writable({ ...anonymousUser, loginComplete: false })
+  const { subscribe, set } = writable(new AppUser())
 
   firebaseAuth.subscribe((fbAuth) => {
-    fbAuth.onAuthStateChanged((user) => {
+    fbAuth.onAuthStateChanged(async (user) => {
       console.log('auth state changed', user)
       if (user) {
         const au = new AppUser(user)
+        await syncFirebaseUser(au)
         au.loginComplete = true
         set(au)
       } else {
