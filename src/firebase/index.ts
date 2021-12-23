@@ -1,9 +1,11 @@
 import { firebaseConfig } from '../env'
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getFirestore  } from 'firebase/firestore'
 import { readable } from 'svelte/store'
 import type { FirebaseApp } from 'firebase/app'
 import type { Auth } from 'firebase/auth'
+import type { Firestore } from 'firebase/firestore'
 import type { Readable } from 'svelte/store'
 
 // SvelteKit init for Firebase at the _Client side_
@@ -43,4 +45,23 @@ const firebaseAuth: Readable<Auth> = readable(null, (set) => {
   return noop
 })
 
-export { firebaseApp, firebaseAuth }
+let firestore: Firestore | null = null
+/**
+ * @returns {Firestore} Firebase Firestore instance
+ */
+const firebaseFirestore: Readable<Firestore> = readable(null, (set) => {
+  if (!app) {
+    app = getApp()
+  }
+  if (!firestore) {
+    firestore = getFirestore(app)
+  }
+  set(firestore)
+  return noop
+})
+
+export { 
+  firebaseApp,
+  firebaseAuth,
+  firebaseFirestore
+}
